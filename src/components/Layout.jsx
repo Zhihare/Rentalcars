@@ -5,6 +5,7 @@ const Layout = () => {
 	return (
 		<>
 			<div>Layout</div>
+			<button>click</button>
 			<Outlet />
 		</>
 	)
