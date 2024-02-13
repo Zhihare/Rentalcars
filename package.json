@@ -2,6 +2,7 @@
   "name": "rentalcars",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://Zhihare.github.io/rentalcars/",
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.0",
     "@testing-library/jest-dom": "^5.17.0",
