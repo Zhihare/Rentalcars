@@ -1,7 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import {
 	persistStore,
-	persistReducer,
+	// persistReducer,
 	FLUSH,
 	REHYDRATE,
 	PAUSE,
@@ -10,7 +10,7 @@ import {
 	REGISTER,
 } from 'redux-persist';
 
-import storage from 'redux-persist/lib/storage';
+// import storage from 'redux-persist/lib/storage';
 
 
 const rootReducer = combineReducers({
