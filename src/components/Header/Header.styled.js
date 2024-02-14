@@ -4,11 +4,24 @@ import styled from "styled-components";
 export const HeaderSection = styled.header`
 
 @media(max-width: 600px){
-	display: flex;
-    justify-content: space-around;
-	font-size: 14px;
-	padding: 10px 0; 
-	background-color: red;
+	background-color: white;
+	border-top: 1px solid grey;
+	position: fixed;
+    z-index: 10;
+    bottom: 0;
+    left: 0;
+	height: 60px;
+width:100%;
+display: flex;
+justify-content:center;
+align-items: center;
+color: black;
+
+	a{
+			text-decoration: none;
+	 		transition-duration: .8s;
+			color:black;
+		}
 }
 	
 
@@ -21,11 +34,14 @@ export const HeaderSection = styled.header`
     margin-left: auto;
 	color: var(----button-color-hover);
 	padding: 15px 0; 
-	border: 1px solid red;
+	/* border-bottom: 1px solid grey; */
 }
 `
 
-export const Logo = styled.div`
+export const LogoConteiner = styled.div`
+@media(max-width: 600px){
+	display: none;
+}
 margin-left: 20px;
 
 p{
@@ -51,5 +67,9 @@ span{
 `
 
 export const Navigation = styled.div`
+@media(max-width: 600px){
+	margin: auto;
+	
+}
 	margin: auto 20px auto 0;
 `

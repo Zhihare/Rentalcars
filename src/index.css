@@ -6,6 +6,9 @@
 
   --button-color: #3470FF;
   --button-color-hover: #0B44CD;
+  --text-color-grey: rgba(18, 20, 23, 0.5);
+  --text-color: rgb(18, 20, 23);
+  --text-color-active: rgb(52, 112, 255)
 }
 
 * {
@@ -72,7 +75,7 @@ label {
 
 body {
   margin: 0 auto;
-  max-width: 1184px;
+  max-width: 1200px;
 
 }
 
