@@ -1,7 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { catalogReducer } from './catalogSlice';
 import {
 	persistStore,
-	// persistReducer,
 	FLUSH,
 	REHYDRATE,
 	PAUSE,
@@ -14,7 +14,7 @@ import {
 
 
 const rootReducer = combineReducers({
-	// auth: persistReducer(authConfig, authReducer),
+	catalog: catalogReducer,
 });
 export const store = configureStore({
 	reducer: rootReducer,

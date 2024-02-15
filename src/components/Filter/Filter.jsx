@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
-import { FilterForm, FilterFormInput } from './Filter.styled';
+import { FilterForm, FilterFormButton, FilterFormInput } from './Filter.styled';
 
 const MyForm = () => {
 	const [selectedOption1, setSelectedOption1] = useState('');
@@ -20,19 +20,51 @@ const MyForm = () => {
 		{ value: 'Choice C', label: 'Choice C' },
 	];
 
-	const customStyles = {
+	const customStylesBrand = {
 		control: (provided) => ({
 			...provided,
 			height: 48,
+			width: 224,
 			border: 'none',
 			borderRadius: '10px',
 			backgroundColor: '#F7F7FB',
 			color: 'black',
+			marginTop: '8px',
 
 		}),
+		placeholder: (provided) => ({
+			...provided,
+			color: '#121417',
+			fontFamily: 'Manrope',
+			fontSize: '18px',
+			fontWeight: '500',
+			lineHeight: '20px',
+		})
 	};
 
-	console.log(customStyles);
+	const customStylesPrice = {
+		control: (provided) => ({
+			...provided,
+			height: 48,
+			width: 125,
+			border: 'none',
+			borderRadius: '10px',
+			backgroundColor: '#F7F7FB',
+			color: 'black',
+			marginTop: '8px',
+		}),
+
+		placeholder: (provided) => ({
+			...provided,
+			color: '#121417',
+			fontFamily: 'Manrope',
+			fontSize: '18px',
+			fontWeight: '500',
+			lineHeight: '20px',
+		})
+	};
+
+
 	const handleCustomInputChange = (e, setInput) => {
 		setInput(e.target.value);
 
@@ -54,7 +86,7 @@ const MyForm = () => {
 						isSearchable
 						isClearable
 						placeholder="Enter the text..."
-						styles={customStyles}
+						styles={customStylesBrand}
 						onChange={(selectedOption1) =>
 							setSelectedOption1(selectedOption1 ? selectedOption1.value : '')}
 					/>
@@ -67,7 +99,7 @@ const MyForm = () => {
 						isSearchable
 						isClearable
 						placeholder="To$"
-						styles={customStyles}
+						styles={customStylesPrice}
 						onChange={(selectedOption2) =>
 							setSelectedOption2(selectedOption2 ? selectedOption2.value : '')}
 					/>
@@ -90,7 +122,7 @@ const MyForm = () => {
 						/>
 					</FilterFormInput>
 				</label>
-				<button type="submit">Submit</button>
+				<FilterFormButton type="submit">Search</FilterFormButton>
 			</FilterForm>
 		</div>
 	);

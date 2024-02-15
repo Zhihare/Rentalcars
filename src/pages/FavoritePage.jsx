@@ -1,8 +1,11 @@
 import React from 'react'
+import MyForm from '../components/Filter/Filter'
 
 const FavoritePage = () => {
 	return (
-		<div>FavoritePage</div>
+		<div>
+			<MyForm></MyForm>
+		</div>
 	)
 }
 
