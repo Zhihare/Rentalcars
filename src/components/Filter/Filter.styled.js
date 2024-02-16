@@ -1,4 +1,5 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
+import Select from 'react-select';
 
 
 export const FilterForm = styled.form`
@@ -8,6 +9,8 @@ justify-content: center;
 flex-wrap: wrap;
 
 label{
+display: flex;
+flex-direction: column;
 height: 74px;
 color: rgb(138, 138, 137);
 font-family: Manrope;
@@ -23,7 +26,7 @@ input{
 	border-right: 1px solid rgba(138, 138, 137, 0.2);
 	border-radius: 14px 0px 0px 14px;
 	background: rgb(247, 247, 251);
-	padding: 14px 18px;
+	padding: 14px 24px 14px 75px;
 	max-width: 160px;
 
 	color: rgb(18, 20, 23);
@@ -31,25 +34,51 @@ input{
 	font-size: 18px;
 	font-weight: 500;
 	line-height: 20px;
-	text-align: left;
+	outline:none;
+
 
 }
+input.two{
+	border-radius: 0px 14px 14px 0px;
+	padding: 14px 24px 14px 53px;
+}
 
+	input::placeholder{
+		color: #121417;
+	}
 
 	input::-webkit-outer-spin-button,
 	input::-webkit-inner-spin-button {
     -webkit-appearance: none;
 }
 
-input:last-child{
-	border-radius: 0px 14px 14px 0px;
-}
+
 `
 
 export const FilterFormInput = styled.div`
 display: flex;
 margin-top: 8px;
 max-width: 320px;
+`
+export const InputContainer = styled.div`
+position: relative;
+
+span{
+	position: absolute;
+	top: 14px;
+    left: 24px;
+
+	color: rgb(18, 20, 23);
+	font-family: Manrope;
+	font-size: 18px;
+	font-weight: 500;
+	line-height: 20px;
+
+}
+`
+
+export const SelectFilter = styled(Select)`
+width: 125px;
 `
 
 export const FilterFormButton = styled.button`

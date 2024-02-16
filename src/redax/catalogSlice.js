@@ -5,11 +5,28 @@ const initialState = {
 	cars: [],
 	isLoading: false,
 	error: null,
+	filter: null,
+	modal: false,
+	modalData: null,
 };
 
 const catalogSlice = createSlice({
 	name: 'catalog',
 	initialState,
+
+	reducers: {
+		setFilter(state, action) {
+			state.filter = action.payload;
+		},
+
+		setModal(state, action) {
+			state.modal = action.payload;
+		},
+		setModalData(state, action) {
+			state.modalData = action.payload;
+		},
+	},
+
 	extraReducers: builder => {
 		builder
 			.addCase(getCatalogCars.fulfilled, (state, action) => {
@@ -27,4 +44,5 @@ const catalogSlice = createSlice({
 			});
 	},
 });
+export const { setFilter, setModal, setModalData } = catalogSlice.actions;
 export const catalogReducer = catalogSlice.reducer;

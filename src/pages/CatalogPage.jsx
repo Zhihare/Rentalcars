@@ -17,9 +17,6 @@ const CatalogPage = () => {
 
 
 
-
-
-
 	return (
 		<>
 			<MyForm></MyForm>

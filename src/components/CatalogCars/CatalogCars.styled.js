@@ -29,7 +29,29 @@ gap: 50px 29px;
 
 export const WrapperItem = styled.div`
 max-width: 274px;
+position: relative;
 
+`
+
+export const FavoriteButton = styled.button`
+position: absolute;
+	top: 14px;
+	right: 14px;
+	z-index: 2;
+	background: transparent;
+	svg {
+		fill: none;
+		stroke: rgba(255, 255, 255, 0.8);
+
+		&:hover {
+			fill: var(--button-color);
+			stroke: var(--button-color);
+		}
+		&.active {
+			fill: var(--button-color);
+			stroke: var(--button-color);
+		}
+	}
 `
 
 

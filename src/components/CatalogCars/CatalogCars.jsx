@@ -1,25 +1,58 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { catalogSelector } from "../../redax/catalogSelector";
+import { useDispatch, useSelector } from "react-redux";
+import { catalogSelector, modalDataSelector, modalSelector, selectFilter } from "../../redax/catalogSelector";
 import defaultimg from "../../img/default_car.jpg";
-import { ButtonItem, ImgCatalog, OptionsItem, TitleContainer, WrapperCatalog, WrapperItem } from "./CatalogCars.styled";
+import { ButtonItem, FavoriteButton, ImgCatalog, OptionsItem, TitleContainer, WrapperCatalog, WrapperItem } from "./CatalogCars.styled";
+import { setModal, setModalData } from "../../redax/catalogSlice";
+import { ModalWind } from "../Modal/Modal";
+import icons from "../../img/icon.svg"
 
 const CatalogCars = () => {
 
 	const cars = useSelector(catalogSelector);
-	console.log(cars);
+	const filter = useSelector(selectFilter);
+	const modal = useSelector(modalSelector);
+	const modalData = useSelector(modalDataSelector)
+
+	const carsArray = filter === null ? cars : filter;
+	const dispatch = useDispatch();
+
+	const onOpenModal = (modalData) => {
+		dispatch(setModal(true));
+		dispatch(setModalData(modalData));
+	}
+
+
+
+
+
+
 
 
 	return (
+
+
 		<WrapperCatalog>
-			{cars.map(({ id, img, address, rentalCompany, rentalPrice, type, model, mileage, year, make, accessories
-			}) => {
+			{carsArray.map((car) => {
+				const { id, img, address, rentalCompany, rentalPrice, type, model, year, make, accessories } = car;
 				const city = address.split(',');
 				const modellength = model.length;
-				console.log(modellength);
+
 
 				return (
 					<WrapperItem key={id}>
+						<FavoriteButton
+							type="button"
+						// onClick={handleToggleFavorite}
+						>
+							<svg
+								width="18"
+								height="18"
+							// className={isFavorite ? item.active : 'heart'}
+							>
+								<use href={icons + '#icon-favorite'}></use>
+							</svg>
+						</FavoriteButton>
 						{!img ?
 							<ImgCatalog src={defaultimg} alt={make} /> :
 							<ImgCatalog src={img} alt={make} />}
@@ -36,12 +69,14 @@ const CatalogCars = () => {
 						</OptionsItem>
 						<OptionsItem>
 							<span>{type}</span><span>{make}</span> <span>{id}</span><span>{accessories[0]}</span></OptionsItem>
-						<ButtonItem>Learn more</ButtonItem>
+						<ButtonItem onClick={() => onOpenModal(car)}>Learn more</ButtonItem>
 					</WrapperItem>
 				)
 			})
 			}
+			{modal && <ModalWind car={modalData} />}
 		</WrapperCatalog>
+
 	)
 }
 

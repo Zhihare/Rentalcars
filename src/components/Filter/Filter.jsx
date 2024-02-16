@@ -1,68 +1,27 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
-import { FilterForm, FilterFormButton, FilterFormInput } from './Filter.styled';
+import { FilterForm, FilterFormButton, FilterFormInput, InputContainer, SelectFilter } from './Filter.styled';
+import { useDispatch, useSelector } from 'react-redux';
+import { catalogSelector } from '../../redax/catalogSelector';
+import { customStylesBrand, customStylesPrice } from './styleSelect';
+import { createArrayWithStep, makeUniq } from './optionSelect';
+import { setFilter } from '../../redax/catalogSlice';
 
 const MyForm = () => {
-	const [selectedOption1, setSelectedOption1] = useState('');
-	const [selectedOption2, setSelectedOption2] = useState('');
-	const [input1, setInput1] = useState('');
-	const [input2, setInput2] = useState('');
+	const [carsSelector, setCarsSelector] = useState('');
+	const [priceSelector, setPriceSelector] = useState('');
+	const [from, setFrom] = useState('');
+	const [to, setTo] = useState('');
 
-	const options1 = [
-		{ value: 'Option 1', label: 'Option 1' },
-		{ value: 'Option 2', label: 'Option 2' },
-		{ value: 'Option 3', label: 'Option 3' },
-	];
 
-	const options2 = [
-		{ value: 'Choice A', label: 'Choice A' },
-		{ value: 'Choice B', label: 'Choice B' },
-		{ value: 'Choice C', label: 'Choice C' },
-	];
+	const dispatch = useDispatch();
 
-	const customStylesBrand = {
-		control: (provided) => ({
-			...provided,
-			height: 48,
-			width: 224,
-			border: 'none',
-			borderRadius: '10px',
-			backgroundColor: '#F7F7FB',
-			color: 'black',
-			marginTop: '8px',
+	const cars = useSelector(catalogSelector);
 
-		}),
-		placeholder: (provided) => ({
-			...provided,
-			color: '#121417',
-			fontFamily: 'Manrope',
-			fontSize: '18px',
-			fontWeight: '500',
-			lineHeight: '20px',
-		})
-	};
+	const unicModal = makeUniq(cars);
 
-	const customStylesPrice = {
-		control: (provided) => ({
-			...provided,
-			height: 48,
-			width: 125,
-			border: 'none',
-			borderRadius: '10px',
-			backgroundColor: '#F7F7FB',
-			color: 'black',
-			marginTop: '8px',
-		}),
+	const price = createArrayWithStep();
 
-		placeholder: (provided) => ({
-			...provided,
-			color: '#121417',
-			fontFamily: 'Manrope',
-			fontSize: '18px',
-			fontWeight: '500',
-			lineHeight: '20px',
-		})
-	};
 
 
 	const handleCustomInputChange = (e, setInput) => {
@@ -72,8 +31,28 @@ const MyForm = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log('Form submitted:', { selectedOption1, selectedOption2, input1, input2 });
+		// const PriceRental = priceSelector ? `$${priceSelector}` : '';
+		dispatch(setFilter(null));
+		const filters = { carsSelector, priceSelector, from, to };
+		const result = filterCars(cars, filters);
+		dispatch(setFilter(result));
+		console.log(filters);
+		console.log(result);
 	};
+
+
+	const filterCars = (cars, filters) => {
+		return cars.filter(car => {
+			const modelMatch = !filters.carsSelector || car.make.toLowerCase().includes(filters.carsSelector.toLowerCase());
+			const priceMatch = !filters.priceSelector || car.rentalPrice.substring(1) <= filters.priceSelector;
+			const mileageMatch = (!filters.from || car.mileage >= filters.from) &&
+				(!filters.to || car.mileage <= filters.to);
+
+			return modelMatch && priceMatch && mileageMatch;
+		});
+	};
+
+
 
 	return (
 		<div>
@@ -81,45 +60,49 @@ const MyForm = () => {
 				<label>
 					Car brand:
 					<Select
-						options={options1}
+						options={unicModal}
 						type="text"
 						isSearchable
 						isClearable
 						placeholder="Enter the text..."
 						styles={customStylesBrand}
-						onChange={(selectedOption1) =>
-							setSelectedOption1(selectedOption1 ? selectedOption1.value : '')}
+						onChange={(carsSelector) =>
+							setCarsSelector(carsSelector ? carsSelector.value : '')}
 					/>
 				</label>
 				<label>
 					Price/1hour
-					<Select
-						options={options2}
+					<SelectFilter
+						options={price}
 						type='number'
 						isSearchable
 						isClearable
 						placeholder="To$"
 						styles={customStylesPrice}
-						onChange={(selectedOption2) =>
-							setSelectedOption2(selectedOption2 ? selectedOption2.value : '')}
+						onChange={(priceSelector) =>
+							setPriceSelector(priceSelector ? priceSelector.value : '')}
 					/>
 
 				</label>
 				<label>
 					Сar mileage / km
 					<FilterFormInput>
-						<input
-							type="number"
-							value={input1}
-							placeholder='From'
-							onChange={(e) => handleCustomInputChange(e, setInput1)}
-						/>
-						<input
-							type="number"
-							value={input2}
-							placeholder='To'
-							onChange={(e) => handleCustomInputChange(e, setInput2)}
-						/>
+						<InputContainer>
+							<input
+								type="number"
+								value={from}
+								onChange={(e) => handleCustomInputChange(e, setFrom)}
+							/>
+							<span>From</span>
+						</InputContainer>
+						<InputContainer>
+							<input className='two'
+								type="number"
+								value={to}
+								onChange={(e) => handleCustomInputChange(e, setTo)}
+							/>
+							<span>To</span>
+						</InputContainer>
 					</FilterFormInput>
 				</label>
 				<FilterFormButton type="submit">Search</FilterFormButton>
