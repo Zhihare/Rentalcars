@@ -14,7 +14,7 @@ export const ModalWindow = styled.div`
  position: relative;
   width: 541px;
   padding:40px;
- 
+  z-index:30;
 
   left: 50%;
   top: 50%;

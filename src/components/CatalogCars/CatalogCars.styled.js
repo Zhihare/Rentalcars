@@ -37,7 +37,6 @@ export const FavoriteButton = styled.button`
 position: absolute;
 	top: 14px;
 	right: 14px;
-	z-index: 2;
 	background: transparent;
 	svg {
 		fill: none;
