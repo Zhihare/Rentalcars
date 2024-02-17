@@ -3,14 +3,14 @@ import { Overlay, ModalWindow, ModalTitle, ModalImg, Conditions, ButtonModal } f
 import { useDispatch, useSelector } from 'react-redux';
 import { setModal, setModalData } from '../../redax/catalogSlice';
 import { modalDataSelector } from '../../redax/catalogSelector';
-import { OptionsItem, TitleContainer } from '../CatalogCars/CatalogCars.styled';
+import { OptionsItem, TitleContainer } from '../ItemCar/ItemCar.styled';
 import icons from '../../img/icon.svg'
 import defaultimg from '../../img/default_car.jpg'
 export const ModalWind = (carinfo) => {
 
 	const modalData = useSelector(modalDataSelector);
 	const dispatch = useDispatch();
-	console.log(modalData);
+
 
 	const onCloseModal = () => {
 		dispatch(setModal(false));
@@ -37,10 +37,8 @@ export const ModalWind = (carinfo) => {
 	});
 	const city = modalData.address.split(',');
 	const conditions = modalData.rentalConditions.split("\n");
-	console.log(conditions);
+
 	return (
-
-
 		<Overlay onClick={onOverlayClick}>
 			<ModalWindow>
 				<button className='close' onClick={() => onCloseModal()}>

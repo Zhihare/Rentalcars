@@ -6,18 +6,23 @@ export const Overlay = styled.div`
    height: 100%;
   top: 0;
   left: 0;
-  background-color: rgba(18, 20, 23, 0.5);
+  overflow-y: auto;
+  background-color: rgba(18, 20, 23, 0.5); 
+  &::-webkit-scrollbar { width: 0; };
+
 `
 
 export const ModalWindow = styled.div`
-
+margin-top: 20px;
+margin-bottom: 20px;
  position: relative;
-  width: 541px;
+  max-width: 541px;
   padding:40px;
   z-index:30;
+ 
 
   left: 50%;
-  top: 50%;
+  top: 60%;
   transform: translate(-50%, -50%);
 
   display: flex;
@@ -51,7 +56,7 @@ button.close {
 `
 
 export const ModalImg = styled.img`
-width: 461px;
+max-width: 461px;
 height: 248px;
 object-fit: cover;
 border-radius: 14px;

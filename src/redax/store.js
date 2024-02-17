@@ -2,6 +2,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { catalogReducer } from './catalogSlice';
 import {
 	persistStore,
+	persistReducer,
 	FLUSH,
 	REHYDRATE,
 	PAUSE,
@@ -10,12 +11,18 @@ import {
 	REGISTER,
 } from 'redux-persist';
 
-// import storage from 'redux-persist/lib/storage';
+import storage from 'redux-persist/lib/storage';
 
+const carsConfig = {
+	key: 'catalog',
+	storage,
+	whitelist: ['favorites'],
+};
 
 const rootReducer = combineReducers({
-	catalog: catalogReducer,
+	catalog: persistReducer(carsConfig, catalogReducer),
 });
+
 export const store = configureStore({
 	reducer: rootReducer,
 
@@ -28,3 +35,7 @@ export const store = configureStore({
 });
 
 export const persistor = persistStore(store);
+
+
+
+

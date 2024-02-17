@@ -1,9 +1,9 @@
 import './App.css';
 import { lazy, Suspense } from 'react';
-import { Route, Routes } from 'react-router-dom';
-import Layout from './components/Layout/Layout';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 
+const Layout = lazy(() => import('./components/Layout/Layout'));
 const HomePage = lazy(() => import('./pages/HomePage'));
 const CatalogPage = lazy(() => import('./pages/CatalogPage'));
 const FavoritePage = lazy(() => import('./pages/FavoritePage'));
@@ -24,6 +24,7 @@ function App() {
               path="/favorites"
               element={<FavoritePage />}
             />
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Route>
         </Routes>
       </Suspense>
