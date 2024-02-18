@@ -49,16 +49,14 @@ p{
     font-weight: 200;
 	color: black;
 	font-size: 28px;
-	background-color: var(--button-color);
 	padding: 5px; 
-	border: 1px solid #1652F0;
+	border: 1px solid #1a1a1a;
   border-radius: 8px;
   box-sizing: border-box;
 }
 
 span{
 	color: var(--button-color);
-	background-color: black;
 	border-radius: 8px;
 
 	
