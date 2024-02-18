@@ -16,7 +16,7 @@ const FavoriteCatalog = () => {
 
 	return (
 		<>
-			{favorites.length === 0 ?
+			{favorites.length === 0 || carsArray.length === 0 ?
 				<TitleInfo>You haven't selected anything yet.<br />
 					Click on the
 					<svg
