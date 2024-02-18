@@ -1,6 +1,7 @@
 import './App.css';
 import { lazy, Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
+import Loader from './components/Loader/Loader';
 
 
 const Layout = lazy(() => import('./components/Layout/Layout'));
@@ -12,12 +13,12 @@ const FavoritePage = lazy(() => import('./pages/FavoritePage'));
 function App() {
   return (
     <>
-      <Suspense >
+      <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} />
-            <Route path="/catalog" element={<CatalogPage />}/>
-            <Route path="/favorites" element={<FavoritePage />}/>
+            <Route path="/catalog" element={<CatalogPage />} />
+            <Route path="/favorites" element={<FavoritePage />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Route>
         </Routes>

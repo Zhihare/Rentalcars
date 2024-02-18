@@ -7,18 +7,18 @@ export const Overlay = styled.div`
   top: 0;
   left: 0;
   overflow-y: auto;
-  background-color: rgba(18, 20, 23, 0.5); 
+  background: rgb(18 20 23 / 5%);
+  
   &::-webkit-scrollbar { width: 0; };
 
 `
 
 export const ModalWindow = styled.div`
 margin-top: 20px;
-margin-bottom: 20px;
  position: relative;
   max-width: 541px;
   padding:40px;
-  z-index:30;
+ 
  
 
   left: 50%;
@@ -97,7 +97,6 @@ span{
 	color: #3470FF;
 font-weight: 600;
 line-height: 18px;
-letter-spacing: -2%;
 text-align: left;
 }
 
@@ -108,6 +107,11 @@ width: 168px;
 height: 44px;
 padding: 12px 0;
 margin-top: 24px;
+margin-bottom: 20px;
+
+@media(min-width: 600px){
+  margin-bottom: 0;
+}
 
 
 border-radius: 12px;

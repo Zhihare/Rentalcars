@@ -4,6 +4,8 @@ export const ContainerKey = styled.div`
 	box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
 	padding: 15px;
 	max-width: 530px;
+	margin-bottom: 50px;
+	margin: 0 auto;
 
 	span{
 		color: var(--text-color-active);

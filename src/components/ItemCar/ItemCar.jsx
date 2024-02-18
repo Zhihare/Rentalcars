@@ -50,7 +50,7 @@ const ItemCar = ({ car }) => {
 	return (
 
 		<>
-			<WrapperItem key={id}>
+			<WrapperItem>
 				<FavoriteButton
 					type="button"
 					onClick={togleFavorite}
@@ -77,11 +77,14 @@ const ItemCar = ({ car }) => {
 				<OptionsItem>
 					<span>{city[1]}</span><span>{city[2]}</span><span>{rentalCompany}</span>
 				</OptionsItem>
-				<OptionsItem>
+				<OptionsItem style={{
+					height: '20px',
+					overflow: 'hidden'
+				}}>
 					<span>{type}</span><span>{make}</span> <span>{id}</span><span>{accessories[0]}</span></OptionsItem>
 				<ButtonItem onClick={() => onOpenModal(car)}>Learn more</ButtonItem>
 			</WrapperItem>
-			{modal && <ModalWind car={modalData} />}
+			{modal && <ModalWind key={id} car={modalData} />}
 		</>
 
 	)

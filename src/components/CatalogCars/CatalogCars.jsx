@@ -5,6 +5,8 @@ import { catalogSelector, selectFilter } from "../../redax/catalogSelector";
 import { WrapperCatalog } from "./CatalogCars.styled";
 
 import ItemCar from "../ItemCar/ItemCar";
+import { TitleInfo } from "../FavoriteCatalog/FavoriteCatalog.styled";
+
 
 const CatalogCars = () => {
 
@@ -15,15 +17,18 @@ const CatalogCars = () => {
 
 	const carsArray = filter === null ? cars : filter;
 
-
 	return (
+		<>
+			{carsArray.length !== 0 ?
+				<WrapperCatalog>
+					{carsArray.map(e => (
+						<ItemCar key={e.id} car={e} />
+					))}
+				</WrapperCatalog> :
+				<TitleInfo>This criteria did not yield any results.</TitleInfo>
+			}
 
-
-		<WrapperCatalog>
-			{carsArray.map(e => (
-				<ItemCar key={e.id} car={e} />
-			))}
-		</WrapperCatalog>
+		</>
 
 	)
 }

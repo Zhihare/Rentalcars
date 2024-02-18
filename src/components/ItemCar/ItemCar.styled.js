@@ -59,8 +59,7 @@ span{
 `
 
 export const OptionsItem = styled.p`
-	height: 20px;
-	overflow: hidden;
+	
    color: rgba(18, 20, 23, 0.5);
    font-size: 12px;
    font-weight: 400;

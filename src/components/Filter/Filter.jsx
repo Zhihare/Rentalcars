@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
 import { FilterForm, FilterFormButton, FilterFormInput, InputContainer, SelectFilter } from './Filter.styled';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { customStylesBrand, customStylesPrice } from './styleSelect';
 import { createArrayWithStep, makeUniq } from './optionSelect';
 import { setLoadpage } from '../../redax/catalogSlice';
 import { LoadMoreButton } from '../../pages/CatalogPage.styled';
+import { allcatalogSelector } from '../../redax/catalogSelector';
+import { getCatalogAllCars, getFilterCars } from '../../redax/catalogThank';
 
 
 const FilterCarsForm = ({ cars, setFilter }) => {
@@ -17,8 +19,16 @@ const FilterCarsForm = ({ cars, setFilter }) => {
 
 	const dispatch = useDispatch();
 
-	const unicModal = makeUniq(cars);
+	const allcars = useSelector(allcatalogSelector)
+	const unicModal = makeUniq(allcars);
 	const price = createArrayWithStep();
+
+
+	useEffect(() => {
+		if (allcars.length === 0) {
+			dispatch(getCatalogAllCars());
+		}
+	}, [dispatch, allcars]);
 
 
 
@@ -38,6 +48,10 @@ const FilterCarsForm = ({ cars, setFilter }) => {
 			const result = filterCars(cars, filters);
 			dispatch(setFilter(result));
 			LoadMoreButton.className = 'hidden';
+		}
+
+		if (filters.carsSelector !== '' && filters.priceSelector === '' && filters.from === '' && filters.to === '') {
+			dispatch(getFilterCars(filters.carsSelector));
 		}
 	};
 

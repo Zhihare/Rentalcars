@@ -5,6 +5,7 @@ import KeyFuture from '../components/KeyFuture/KeyFuture'
 import GettingSturted from '../components/KeyFuture/GettingSturted'
 
 
+
 const HomePage = () => {
 	return (
 		<Container>

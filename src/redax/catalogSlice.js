@@ -1,10 +1,13 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { getCatalogCars } from './catalogThank';
+import { getCatalogAllCars, getCatalogCars, getFilterCars } from './catalogThank';
 
 const initialState = {
 	cars: [],
-	isLoading: false,
+
+	isLoading: true,
 	error: null,
+
+	allcars: [],
 
 	filterFavorites: null,
 	filter: null,
@@ -47,6 +50,10 @@ const catalogSlice = createSlice({
 			state.filter = action.payload;
 		},
 
+		setIsLoading(state, action) {
+			state.isLoading = action.payload;
+		},
+
 		setFilterFavorites(state, action) {
 			state.filterFavorites = action.payload;
 		},
@@ -68,15 +75,37 @@ const catalogSlice = createSlice({
 				state.cars = state.cars.concat(action.payload);
 			})
 
-			.addMatcher(isAnyOf(getCatalogCars.pending), state => {
-				state.isLoading = true;
-			})
-			.addMatcher(isAnyOf(getCatalogCars.rejected), (state, action) => {
+			.addCase(getCatalogAllCars.fulfilled, (state, action) => {
 				state.isLoading = false;
-				state.error = action.payload;
-			});
+				state.error = null;
+				state.allcars = action.payload;
+			})
+
+			.addCase(getFilterCars.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.error = null;
+				state.filter = action.payload;
+			})
+
+			.addMatcher(
+				isAnyOf(
+					getCatalogCars.pending,
+					getCatalogAllCars.pending,
+					getFilterCars.pending,
+				), state => {
+					state.isLoading = true;
+				})
+			.addMatcher(
+				isAnyOf(
+					getCatalogCars.rejected,
+					getCatalogAllCars.rejected,
+					getFilterCars.rejected,
+				), (state, action) => {
+					state.isLoading = false;
+					state.error = action.payload;
+				});
 	},
 });
 
 export const catalogReducer = catalogSlice.reducer;
-export const { addFavorites, removeFavorites, setFilterFavorites, setFilter, setModal, setModalData, setLoadpage, setCars, setFavorites } = catalogSlice.actions;
+export const { addFavorites, setIsLoading, removeFavorites, setFilterFavorites, setFilter, setModal, setModalData, setLoadpage, setCars, setFavorites } = catalogSlice.actions;
