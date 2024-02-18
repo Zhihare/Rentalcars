@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { customStylesBrand, customStylesPrice } from './styleSelect';
 import { createArrayWithStep, makeUniq } from './optionSelect';
 import { setLoadpage } from '../../redax/catalogSlice';
-import { LoadMoreButton } from '../../pages/CatalogPage.styled';
 import { allcatalogSelector } from '../../redax/catalogSelector';
 import { getCatalogAllCars, getFilterCars } from '../../redax/catalogThank';
 
@@ -47,7 +46,6 @@ const FilterCarsForm = ({ cars, setFilter }) => {
 		} else {
 			const result = filterCars(cars, filters);
 			dispatch(setFilter(result));
-			LoadMoreButton.className = 'hidden';
 		}
 
 		if (filters.carsSelector !== '' && filters.priceSelector === '' && filters.from === '' && filters.to === '') {
